@@ -1,0 +1,46 @@
+name: make img
+
+on:
+  watch:
+    types: [started]
+
+jobs:
+  make_monterey_recovery_partial:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    
+    - name: build
+      run: |
+        cd scripts/monterey
+        make Monterey-recovery.img
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      if: ${{ always() }}
+      with:
+        name: monterey_recovery_partial.img
+        path: /home/runner/work/scripts/monterey/Monterey-recovery.img
+
+  make_monterey_recovery_full:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    
+    - name: build
+      run: |
+        cd scripts/monterey
+        make Monterey-full.img
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      if: ${{ always() }}
+      with:
+        name: monterey_recovery_full.img
+        path: /home/runner/work/scripts/monterey/Monterey-full.img
