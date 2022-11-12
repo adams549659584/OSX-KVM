@@ -6,7 +6,7 @@ on:
 
 jobs:
   make_monterey_recovery_partial:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
@@ -15,9 +15,9 @@ jobs:
     
     - name: build
       run: |
-        sudo apt install qemu-utils make -y
         cd scripts/monterey
         make Monterey-recovery.img
+        pwd
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
@@ -27,7 +27,7 @@ jobs:
         path: /home/runner/work/scripts/monterey/Monterey-recovery.img
 
   make_monterey_recovery_full:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
@@ -36,9 +36,9 @@ jobs:
     
     - name: build
       run: |
-        sudo apt install qemu-utils make -y
         cd scripts/monterey
         make Monterey-full.img
+        pwd
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
