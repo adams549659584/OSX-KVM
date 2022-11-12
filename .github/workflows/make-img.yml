@@ -5,7 +5,7 @@ on:
     types: [started]
 
 jobs:
-  make_monterey_recovery_partial:
+  make_bigsur:
     runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
@@ -13,19 +13,22 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     
-    - name: build
+    - name: make
       run: |
-        cd scripts/monterey
-        make Monterey-recovery.img
+        cd scripts/bigsur
+        make BigSur-recovery.img
+        make BigSur-full.img
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       if: ${{ always() }}
       with:
-        name: monterey_recovery_partial.img
-        path: scripts/monterey/Monterey-recovery.img
+        name: upload_bigsur
+        path: |
+          scripts/bigsur/BigSur-recovery.img
+          scripts/bigsur/BigSur-full.img  
 
-  make_monterey_recovery_full:
+  make_monterey:
     runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
@@ -33,14 +36,40 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     
-    - name: build
+    - name: make
       run: |
         cd scripts/monterey
+        make Monterey-recovery.img
         make Monterey-full.img
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       if: ${{ always() }}
       with:
-        name: monterey_recovery_full.img
-        path: scripts/monterey/Monterey-full.img
+        name: upload_monterey
+        path: |
+          scripts/monterey/Monterey-recovery.img
+          scripts/monterey/Monterey-full.img
+          
+  make_ventura:
+    runs-on: macos-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    
+    - name: make
+      run: |
+        cd scripts/ventura
+        make Ventura-recovery.img
+        make Ventura-full.img
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      if: ${{ always() }}
+      with:
+        name: upload_ventura
+        path: |
+          scripts/ventura/Ventura-recovery.img
+          scripts/ventura/Ventura-full.img          
