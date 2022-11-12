@@ -17,14 +17,13 @@ jobs:
       run: |
         cd scripts/monterey
         make Monterey-recovery.img
-        pwd
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       if: ${{ always() }}
       with:
         name: monterey_recovery_partial.img
-        path: /Users/runner/work/OSX-KVM/OSX-KVM/scripts/monterey/Monterey-recovery.img
+        path: scripts/monterey/Monterey-recovery.img
 
   make_monterey_recovery_full:
     runs-on: macos-latest
@@ -38,11 +37,10 @@ jobs:
       run: |
         cd scripts/monterey
         make Monterey-full.img
-        pwd
 
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       if: ${{ always() }}
       with:
         name: monterey_recovery_full.img
-        path: /Users/runner/work/OSX-KVM/OSX-KVM/scripts/monterey/Monterey-full.img
+        path: scripts/monterey/Monterey-full.img
