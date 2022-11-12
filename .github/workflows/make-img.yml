@@ -24,7 +24,7 @@ jobs:
       if: ${{ always() }}
       with:
         name: monterey_recovery_partial.img
-        path: /home/runner/work/scripts/monterey/Monterey-recovery.img
+        path: /Users/runner/work/OSX-KVM/OSX-KVM/scripts/monterey/Monterey-recovery.img
 
   make_monterey_recovery_full:
     runs-on: macos-latest
@@ -45,4 +45,4 @@ jobs:
       if: ${{ always() }}
       with:
         name: monterey_recovery_full.img
-        path: /home/runner/work/scripts/monterey/Monterey-full.img
+        path: /Users/runner/work/OSX-KVM/OSX-KVM/scripts/monterey/Monterey-full.img
