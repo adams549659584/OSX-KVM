@@ -10,7 +10,7 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-    - name: Checkout
+    - name: chekcout
       uses: actions/checkout@master
     
     - name: make
@@ -19,21 +19,26 @@ jobs:
         make BigSur-recovery.img
         make BigSur-full.img
 
-    - name: Upload artifacts
+    - name: upload BigSur-recovery
       uses: actions/upload-artifact@master
       if: ${{ always() }}
       with:
-        name: upload_bigsur
-        path: |
-          scripts/bigsur/BigSur-recovery.img
-          scripts/bigsur/BigSur-full.img  
+        name: bigSur-recovery
+        path: scripts/bigsur/BigSur-recovery.img
+
+    - name: upload BigSur-full
+      uses: actions/upload-artifact@master
+      if: ${{ always() }}
+      with:
+        name: bigSur-full
+        path: scripts/bigsur/BigSur-full.img
 
   make_monterey:
     runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-    - name: Checkout
+    - name: checkout
       uses: actions/checkout@master
     
     - name: make
@@ -42,21 +47,28 @@ jobs:
         make Monterey-recovery.img
         make Monterey-full.img
 
-    - name: Upload artifacts
+    - name: upload Monterey-recovery
       uses: actions/upload-artifact@master
       if: ${{ always() }}
       with:
-        name: upload_monterey
+        name: monterey-recovery
         path: |
           scripts/monterey/Monterey-recovery.img
           scripts/monterey/Monterey-full.img
-          
+
+    - name: upload Monterey-full
+      uses: actions/upload-artifact@master
+      if: ${{ always() }}
+      with:
+        name: monterey-full
+        path: scripts/monterey/Monterey-full.img 
+                   
   make_ventura:
     runs-on: macos-latest
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-    - name: Checkout
+    - name: checkout
       uses: actions/checkout@master
     
     - name: make
@@ -65,11 +77,16 @@ jobs:
         make Ventura-recovery.img
         make Ventura-full.img
 
-    - name: Upload artifacts
+    - name: upload Ventura-recovery
       uses: actions/upload-artifact@master
       if: ${{ always() }}
       with:
-        name: upload_ventura
-        path: |
-          scripts/ventura/Ventura-recovery.img
-          scripts/ventura/Ventura-full.img          
+        name: ventura-recovery
+        path: scripts/ventura/Ventura-recovery.img
+         
+    - name: upload Ventura-full
+      uses: actions/upload-artifact@master
+      if: ${{ always() }}
+      with:
+        name: ventura-full
+        path: scripts/ventura/Ventura-full.img     
