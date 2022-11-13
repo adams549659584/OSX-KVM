@@ -52,10 +52,8 @@ jobs:
       if: ${{ always() }}
       with:
         name: monterey-recovery
-        path: |
-          scripts/monterey/Monterey-recovery.img
-          scripts/monterey/Monterey-full.img
-
+        path: scripts/monterey/Monterey-recovery.img
+        
     - name: upload Monterey-full
       uses: actions/upload-artifact@master
       if: ${{ always() }}
